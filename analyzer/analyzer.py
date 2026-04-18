@@ -82,7 +82,6 @@ def check_information_disclosure(response):
                 "evidence": pattern
             })
 
-    # headers
     if "server" in headers:
         findings.append({
             "type": "header_disclosure",
@@ -141,9 +140,10 @@ def analyze_response(response):
 # ──────────────────────────────────────────────
 
 try:
-    from ai.llm_client import analyze_with_ai
-except:
+    from ai.llm_client import analyze_with_ai, build_prompt
+except Exception:
     analyze_with_ai = None
+    build_prompt = None
 
 
 def analyze_multiple(responses, use_ai=False):
@@ -152,11 +152,19 @@ def analyze_multiple(responses, use_ai=False):
     for r in responses:
         result = analyze_response(r)
 
-        if use_ai and analyze_with_ai:
-            try:
-                result["ai_analysis"] = analyze_with_ai(r)
-            except:
-                result["ai_analysis"] = "Erro na IA"
+        # Só chama a IA se: tiver findings relevantes e score alto (evita analisar todo 404)
+        if use_ai and analyze_with_ai and build_prompt:
+            high_findings = [f for f in result["findings"] if f["severity"] in ("high", "medium")]
+            if high_findings:
+                ai_outputs = []
+                for finding in high_findings:
+                    try:
+                        prompt = build_prompt(finding)
+                        ai_response = analyze_with_ai(prompt)
+                        ai_outputs.append(f"[{finding['type'].upper()}] {ai_response}")
+                    except Exception as e:
+                        ai_outputs.append(f"Erro na IA: {e}")
+                result["ai_analysis"] = "\n".join(ai_outputs)
 
         results.append(result)
 

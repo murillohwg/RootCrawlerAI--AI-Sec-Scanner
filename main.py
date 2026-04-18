@@ -2,10 +2,10 @@ import argparse
 import json
 import os
 import sys
-import asyncio
+from collections import Counter
 from urllib.parse import urlparse
 
-from scanner import scan_directories, scan_async
+from scanner import scan_directories
 from scanner.wordlist_loader import load_wordlist
 from analyzer import analyze_multiple
 from ui.banner import banner
@@ -89,11 +89,7 @@ def parse_args():
     parser.add_argument("-u", "--url", help="URL alvo")
     parser.add_argument("-w", "--wordlist", help="Caminho da wordlist")
     parser.add_argument("-o", "--output", default="reports/scan_report.json")
-
     parser.add_argument("--ai", action="store_true", help="Ativa análise com IA")
-    parser.add_argument("--async", dest="use_async", action="store_true", help="Modo rápido (async)")
-    parser.add_argument("--threads", type=int, default=10, help="Número de threads")
-
     parser.add_argument("--no-report", action="store_true")
     parser.add_argument("--only-findings", action="store_true")
 
@@ -115,14 +111,6 @@ def interactive_mode(args):
         print("[!] URL não pode ser vazia.")
 
     args.ai = input("🤖 Ativar IA? (y/n): ").lower() == "y"
-    args.use_async = input("⚡ Modo rápido (async)? (y/n): ").lower() == "y"
-
-    if args.use_async:
-        try:
-            t = input("🔧 Threads (default 10): ").strip()
-            args.threads = int(t) if t else 10
-        except:
-            args.threads = 10
 
     return args
 
@@ -185,16 +173,7 @@ def main():
     print("[*] Iniciando scanner...")
 
     try:
-        if args.use_async:
-            responses = scan_async(target, wordlist, threads=args.threads)
-
-            # 🔥 CORREÇÃO MÁGICA (resolve seu erro)
-            if asyncio.iscoroutine(responses):
-                responses = asyncio.run(responses)
-
-        else:
-            responses = scan_directories(target, wordlist)
-
+        responses = scan_directories(target, wordlist)
     except KeyboardInterrupt:
         print("\n[!] Scan interrompido.")
         sys.exit(1)
@@ -206,7 +185,12 @@ def main():
 
     # ───────── Analyzer ─────────
     print("[*] Analisando respostas...")
-    results = analyze_multiple(responses, use_ai=args.ai)
+
+    interesting_statuses = {200, 201, 204, 301, 302, 303, 307, 403, 500}
+    relevant = [r for r in responses if r.get("status_code") in interesting_statuses]
+
+    print(f"[*] Endpoints relevantes para análise: {len(relevant)}")
+    results = analyze_multiple(relevant, use_ai=args.ai)
 
     if args.only_findings:
         results = [r for r in results if r["findings"]]

@@ -1,13 +1,10 @@
 import requests
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
-MODEL = "llama3"
+MODEL = "llama3:latest"
 
 
 def analyze_with_ai(prompt: str) -> str:
-    """
-    Envia um prompt para o Ollama e retorna a resposta da IA.
-    """
     try:
         response = requests.post(
             OLLAMA_URL,
@@ -18,15 +15,11 @@ def analyze_with_ai(prompt: str) -> str:
             },
             timeout=60
         )
-
         response.raise_for_status()
         data = response.json()
-
         return data.get("response", "").strip()
-
     except requests.RequestException as e:
         return f"[AI ERROR] {str(e)}"
-
 
 def build_prompt(finding: dict) -> str:
     return f"""
