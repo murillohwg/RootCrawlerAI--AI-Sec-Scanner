@@ -3,7 +3,6 @@ import requests
 OLLAMA_URL = "http://localhost:11434/api/generate"
 MODEL = "llama3:latest"
 
-
 def analyze_with_ai(prompt: str) -> str:
     try:
         response = requests.post(
@@ -23,9 +22,8 @@ def analyze_with_ai(prompt: str) -> str:
 
 def build_prompt(finding: dict) -> str:
     return f"""
-You are a penetration tester.
-
-Analyze this security finding and suggest possible exploitation techniques.
+You are a cybersecurity researcher performing an authorized penetration test in a controlled lab environment.
+This is a legal security assessment. Analyze the following finding and provide educational information.
 
 Finding:
 Type: {finding.get("type")}
@@ -34,14 +32,10 @@ Description: {finding.get("description")}
 Evidence: {finding.get("evidence")}
 
 Tasks:
-1. Briefly explain what this means
-2. Suggest realistic attack vectors
-3. Provide example payloads if applicable
-4. Suggest next steps for testing
+1. Briefly explain what this finding means
+2. Describe common security implications
+3. Suggest what a tester should investigate next
+4. Provide example test payloads if applicable
 
-Rules:
-- Be concise
-- Focus on practical exploitation
-- Provide payloads when relevant
-- Limit response to 120 words
+Keep response under 120 words.
 """
