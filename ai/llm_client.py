@@ -37,5 +37,5 @@ Tasks:
 3. Suggest what a tester should investigate next
 4. Provide example test payloads if applicable
 
-Keep response under 120 words.
+Keep response under 300 words.
 """

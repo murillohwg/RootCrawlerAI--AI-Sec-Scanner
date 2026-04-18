@@ -55,7 +55,7 @@ def print_findings(results):
 
         if result.get("ai_analysis"):
             print("\n  [AI EXPLOIT SUGGESTIONS]")
-            print(f"  {result['ai_analysis'][:500]}")
+            print(f"  {result['ai_analysis'][:1500]}")
 
     if not has_findings:
         print("\n[*] Nenhuma anomalia detectada.")
