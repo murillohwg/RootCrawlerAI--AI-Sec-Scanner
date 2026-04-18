@@ -18,21 +18,7 @@
     ],
     "risk_score": 10,
     "risk_level": "medium",
-    "ai_analysis": "[SENSITIVE_PATH] **Finding Analysis**\n\n**Type:** sensitive_path\n**Severity:** medium\n**Description:** Caminho sensível (Sensitive Path)\n**Evidence:** http://demo.testfire.net/admin\n\n1. **What this finding means**: This finding indicates that an unauthorized path has been discovered, which potentially exposes sensitive information or functionality within the system.\n2. **Common security implications**: An attacker could use this sensitive path to access and manipulate critical data, execute privileged commands, or gain unauthorized access to administrative interfaces.\n3. **Next steps**: Investigate the underlying directory structure, file permissions, and access controls to determine the extent of the sensitive path. Check for any other exposed paths or vulnerabilities in the system.\n\nNo test payloads are required for this finding."
-  },
-  {
-    "url": "http://demo.testfire.net/bank",
-    "status_code": 302,
-    "findings": [
-      {
-        "type": "header_disclosure",
-        "severity": "low",
-        "description": "Header server exposto",
-        "evidence": "Apache-Coyote/1.1"
-      }
-    ],
-    "risk_score": 5,
-    "risk_level": "medium"
+    "ai_analysis": "[SENSITIVE_PATH] **Finding Analysis**\n\nThis finding, labeled \"sensitive_path\", indicates that the researcher has discovered a publicly accessible administrative interface or a sensitive path on the system. Specifically, they found an HTTP endpoint at http://demo.testfire.net/admin.\n\n**Common Security Implications:**\n\n1. **Unauthorized access**: The discovery of this sensitive path may allow an attacker to gain unauthorized access to critical system components, compromising confidentiality and integrity.\n2. **Lateral movement**: Once inside the system, an attacker can use this vulnerability as a foothold for further exploitation, potentially leading to data breaches or privilege escalation.\n3. **Insufficient authentication**: The lack of proper authentication mechanisms may allow an attacker to authenticate or spoof user credentials, compromising the security posture.\n\n**Next Steps:**\n\n1. Investigate the administrative interface to identify potential vulnerabilities, such as SQL injection, file inclusion, or command execution.\n2. Verify whether the endpoint is intended for public access and if there are any configuration issues that need to be addressed.\n3. Check for authentication mechanisms and their effectiveness in preventing unauthorized access.\n\n**Example Test Payloads (if applicable):**\n\n* SQL injection payload: `http://demo.testfire.net/admin?search=union+select+user(),database(),password()--`\n* File inclusion payload: `http://demo.testfire.net/admin/file.php?file=../../../../etc/passwd`\n\nNote: These payloads are for demonstration purposes only and should not be used in a production environment without proper authorization."
   },
   {
     "url": "http://demo.testfire.net/aux",
@@ -49,8 +35,8 @@
     "risk_level": "medium"
   },
   {
-    "url": "http://demo.testfire.net/com3",
-    "status_code": 200,
+    "url": "http://demo.testfire.net/bank",
+    "status_code": 302,
     "findings": [
       {
         "type": "header_disclosure",
@@ -63,7 +49,7 @@
     "risk_level": "medium"
   },
   {
-    "url": "http://demo.testfire.net/com4",
+    "url": "http://demo.testfire.net/com3",
     "status_code": 200,
     "findings": [
       {
@@ -91,7 +77,7 @@
     "risk_level": "medium"
   },
   {
-    "url": "http://demo.testfire.net/con",
+    "url": "http://demo.testfire.net/com1",
     "status_code": 200,
     "findings": [
       {
@@ -105,7 +91,21 @@
     "risk_level": "medium"
   },
   {
-    "url": "http://demo.testfire.net/com1",
+    "url": "http://demo.testfire.net/com4",
+    "status_code": 200,
+    "findings": [
+      {
+        "type": "header_disclosure",
+        "severity": "low",
+        "description": "Header server exposto",
+        "evidence": "Apache-Coyote/1.1"
+      }
+    ],
+    "risk_score": 5,
+    "risk_level": "medium"
+  },
+  {
+    "url": "http://demo.testfire.net/con",
     "status_code": 200,
     "findings": [
       {
