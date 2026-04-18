@@ -10,7 +10,7 @@ The **AI Web Security Scanner** is a Python-based tool designed for web security
 
 It combines:
 
-- ⚡ Asynchronous directory scanning
+- ⚡ Asynchronous directory scanning(working on it)
 - 🔍 HTTP response analysis
 - 🧠 AI-assisted vulnerability interpretation
 - 📊 Structured reporting system
