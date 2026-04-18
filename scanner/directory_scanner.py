@@ -2,7 +2,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from scanner.http_client import make_request
 
 
-def scan_directories(base_url, wordlist, threads=20):
+def scan_directories(base_url, wordlist, threads=50):
     results = []
 
     def scan(word):

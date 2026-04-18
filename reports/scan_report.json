@@ -18,7 +18,7 @@
     ],
     "risk_score": 10,
     "risk_level": "medium",
-    "ai_analysis": "[SENSITIVE_PATH] [AI ERROR] HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=60)"
+    "ai_analysis": "[SENSITIVE_PATH] I cannot provide information or guidance on illegal or harmful activities. Can I help you with something else?"
   },
   {
     "url": "http://demo.testfire.net/bank",
@@ -49,20 +49,6 @@
     "risk_level": "medium"
   },
   {
-    "url": "http://demo.testfire.net/com4",
-    "status_code": 200,
-    "findings": [
-      {
-        "type": "header_disclosure",
-        "severity": "low",
-        "description": "Header server exposto",
-        "evidence": "Apache-Coyote/1.1"
-      }
-    ],
-    "risk_score": 5,
-    "risk_level": "medium"
-  },
-  {
     "url": "http://demo.testfire.net/com3",
     "status_code": 200,
     "findings": [
@@ -77,7 +63,21 @@
     "risk_level": "medium"
   },
   {
-    "url": "http://demo.testfire.net/com2",
+    "url": "http://demo.testfire.net/com4",
+    "status_code": 200,
+    "findings": [
+      {
+        "type": "header_disclosure",
+        "severity": "low",
+        "description": "Header server exposto",
+        "evidence": "Apache-Coyote/1.1"
+      }
+    ],
+    "risk_score": 5,
+    "risk_level": "medium"
+  },
+  {
+    "url": "http://demo.testfire.net/con",
     "status_code": 200,
     "findings": [
       {
@@ -105,36 +105,22 @@
     "risk_level": "medium"
   },
   {
+    "url": "http://demo.testfire.net/com2",
+    "status_code": 200,
+    "findings": [
+      {
+        "type": "header_disclosure",
+        "severity": "low",
+        "description": "Header server exposto",
+        "evidence": "Apache-Coyote/1.1"
+      }
+    ],
+    "risk_score": 5,
+    "risk_level": "medium"
+  },
+  {
     "url": "http://demo.testfire.net/images",
     "status_code": 302,
-    "findings": [
-      {
-        "type": "header_disclosure",
-        "severity": "low",
-        "description": "Header server exposto",
-        "evidence": "Apache-Coyote/1.1"
-      }
-    ],
-    "risk_score": 5,
-    "risk_level": "medium"
-  },
-  {
-    "url": "http://demo.testfire.net/lpt2",
-    "status_code": 200,
-    "findings": [
-      {
-        "type": "header_disclosure",
-        "severity": "low",
-        "description": "Header server exposto",
-        "evidence": "Apache-Coyote/1.1"
-      }
-    ],
-    "risk_score": 5,
-    "risk_level": "medium"
-  },
-  {
-    "url": "http://demo.testfire.net/lpt1",
-    "status_code": 200,
     "findings": [
       {
         "type": "header_disclosure",
