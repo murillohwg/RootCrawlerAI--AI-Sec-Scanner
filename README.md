@@ -58,9 +58,10 @@ pip install -r requirements.txt
 ---
 
 ## Project Architecture
-```bash
-Scanner → Async Engine → Analyzer → AI Layer → Report Generator
-```
+
+[architecture](./images/architecture.png)
+
+
 ---
 
 ## Project Structure
