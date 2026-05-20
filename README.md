@@ -1,4 +1,4 @@
-# 🧠 AI Web Security Scanner
+# AI Web Security Scanner
 
 > Automated web reconnaissance tool with asynchronous scanning, vulnerability detection, and AI-assisted analysis.
 
@@ -117,7 +117,7 @@ optional LLM integration
 
 This project was built to explore:
 
-Real-world asynchronous programming
-Web security fundamentals
-Automation of reconnaissance tasks
-Integration of AI into security tooling
+-Real-world asynchronous programming
+-Web security fundamentals
+-Automation of reconnaissance tasks
+-Integration of AI into security tooling
